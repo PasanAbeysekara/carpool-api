@@ -12,7 +12,6 @@ db.once('open', () => console.log('Connected to Database'));
 
 app.use(express.json());
 
-const subscribersRouter = require('./routes/subscribers');
 const ridesRouter = require('./routes/rides');
 const profilesRouter = require('./routes/profiles');
 const requestsRouter = require('./routes/requests');
@@ -20,7 +19,6 @@ const requestsRouter = require('./routes/requests');
 // Enable CORS for all origins
 app.use(cors());
 
-app.use('/subscribers', subscribersRouter);
 app.use('/rides', ridesRouter);
 app.use('/profiles', profilesRouter);
 app.use('/requests', requestsRouter);
