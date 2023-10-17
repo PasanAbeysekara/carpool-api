@@ -2,19 +2,15 @@ const express = require('express');
 const router = express.Router();
 const Profile = require('../models/profile');
 
-// Getting all profiles
+// Getting one profile by email
 router.get('/', async (req, res) => {
+  const { email } = req.query;
   try {
-    const profiles = await Profile.find();
-    res.json(profiles);
+    const profile = await Profile.findOne({ email: email });
+    res.json(profile);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-});
-
-// Getting one profile
-router.get('/:id', getProfile, (req, res) => {
-  res.json(res.profile);
 });
 
 // Creating a profile
@@ -22,7 +18,8 @@ router.post('/', async (req, res) => {
   const profile = new Profile({
     name: req.body.name,
     email: req.body.email,
-    contactNumber: req.body.contactNumber,
+    displayName: req.body.displayName,
+    bio: req.body.bio,
   });
   try {
     const newProfile = await profile.save();
@@ -37,7 +34,15 @@ router.patch('/:id', getProfile, async (req, res) => {
   if (req.body.name != null) {
     res.profile.name = req.body.name;
   }
-  // Similarly update other fields accordingly
+  if (req.body.email != null) {
+    res.profile.email = req.body.email;
+  }
+  if (req.body.displayName != null) {
+    res.profile.displayName = req.body.displayName;
+  }
+  if (req.body.bio != null) {
+    res.profile.bio = req.body.bio;
+  }
   try {
     const updatedProfile = await res.profile.save();
     res.json(updatedProfile);

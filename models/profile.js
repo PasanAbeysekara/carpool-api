@@ -9,9 +9,13 @@ const profileSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  contactNumber: {
+  displayName: {
     type: String,
-    required: true
+    required: false // Adjust the requirement based on your needs
+  },
+  bio: {
+    type: String,
+    required: false // Adjust the requirement based on your needs
   }
 });
 
