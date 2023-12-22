@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Creating a profile
+// Creating profile
 router.post('/', async (req, res) => {
   const profile = new Profile({
     name: req.body.name,
@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Updating a profile
+// Updating profile
 router.patch('/:id', getProfile, async (req, res) => {
   if (req.body.name != null) {
     res.profile.name = req.body.name;
